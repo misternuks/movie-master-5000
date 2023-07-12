@@ -23,7 +23,7 @@ default: &default
 
 development:
   <<: *default
-  database: movie_master_5000_development
+  database: ruby_db_hub_development
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
