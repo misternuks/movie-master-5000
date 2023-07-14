@@ -13,5 +13,16 @@ class MovieListsController < ApplicationController
 
   def create
     @list = MovieList.new(movie_list_params)
+    if @list.save
+      redirect_to movie_lists_path
+    else
+      render :new, status: :unprocessable_entity
+    end
+  end
+
+  private
+
+  def movie_list_params
+    params.require(:movie_list).permit(:name)
   end
 end
