@@ -20,6 +20,12 @@ class MovieListsController < ApplicationController
     end
   end
 
+  def destroy
+    @list = MovieList.find(params[:id])
+    @list.delete
+    redirect_to movie_lists_path, status: :see_other
+  end
+
   private
 
   def movie_list_params
