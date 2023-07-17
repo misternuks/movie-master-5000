@@ -1,21 +1,46 @@
-<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(http://source.unsplash.com/random/?<%= @list.name.split(' ').first %>&<%= rand(100) %>);">
+<div class="banner position-relative" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(http://source.unsplash.com/random/?<%= @list.name.split(' ').first %>&movie&<%= rand(100) %>);">
   <div class="container">
-    <h1><%= @list.name %> Movies</h1>
-    <p>View your movie bookmarks and comments below. Click + to add a new bookmark.</p>
+    <h1><%= @list.name %></h1>
+    <p>View your movie bookmarks below, or add a new one.</p>
+    <%= link_to "Create a new bookmark", new_movie_list_movie_bookmark_path(@list), class: "btn btn-flat" %>
+    <%= link_to movie_list_path(@list),
+                class: "position-absolute bottom-0 end-0 m-2",
+                data: { turbo_method: :delete,
+                turbo_confirm: "Do you want to delete this list and its related bookmarks?" } do %>
+      <i class="fa-solid fa-trash text-white"></i>
+    <% end %>
   </div>
 </div>
 <div class="container my-5">
-  <% @list.movie_bookmarks.each do |bookmark| %>
+  <% if @list.movie_bookmarks.any? %>
+    <% @list.movie_bookmarks.each do |bookmark| %>
+      <div class="card-trip">
+        <%= image_tag("https://image.tmdb.org/t/p/w500#{bookmark.movie_movie.image_url}") %>
+        <div class="card-trip-infos position-relative">
+          <div>
+            <h2><%= bookmark.movie_movie.title %></h2>
+            <p><%= bookmark.comment %></p>
+          </div>
+          <%= link_to movie_bookmark_path(bookmark),
+                class: "position-absolute bottom-0 end-0 m-2",
+                data: { turbo_method: :delete,
+                turbo_confirm: "Do you want to delete this bookmark?" } do %>
+            <i class="fa-solid fa-trash text-muted"></i>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
     <div class="card-trip">
-      <%= image_tag("https://image.tmdb.org/t/p/w500#{bookmark.movie_movie.image_url}") %>
+      <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/greece.jpg" />
       <div class="card-trip-infos">
         <div>
-          <h2><%= bookmark.movie_movie.title %></h2>
-          <p><%= bookmark.comment %></p>
+          <h2>No movie bookmarks yet!</h2>
+          <p>Click "Create a new bookmark" to add one.</p>
         </div>
-        <img src="https://kitt.lewagon.com/placeholder/users/krokrob" class="card-trip-user avatar-bordered" />
       </div>
     </div>
   <% end %>
-  <%= link_to "Create a new bookmark", new_movie_bookmark_path, class: "btn btn-primary w-100 my-3" %>
+  <%= link_to "Back to the lists", movie_lists_path, class: "btn btn-flat my-3" %>
 </div>
+<%# image_tag("https://image.tmdb.org/t/p/w500#{movie.image_url}") %>

@@ -2,9 +2,10 @@
   <h1>New Movie Bookmark</h1>
   <div class="card p-3 my-3">
     <%= simple_form_for [@list, @bookmark] do |f| %>
-      <%= f.input :comment %>
-      <%= f.association :movie_movie %>
-      <%= f.submit "Add your bookmark", class: "btn btn-primary" %>
+      <%= f.association :movie_movie, label: "Select a movie:" %>
+      <%= f.input :comment, label: "Write a comment about this movie (optional):" %>
+      <%= f.submit "Add your bookmark", class: "btn btn-ghost" %>
     <% end %>
   </div>
+  <%= link_to "Cancel", movie_list_path(@list), class: "btn btn-flat my-3" %>
 </div>

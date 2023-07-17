@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root 'movie_lists#index'
 
-  resources :movie_lists
-  resources :movie_bookmarks
+  resources :movie_lists do
+    resources :movie_bookmarks, only: %i[new create]
+  end
+  resources :movie_bookmarks, only: [:destroy]
 end
