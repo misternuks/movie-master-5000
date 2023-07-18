@@ -18,7 +18,7 @@ class MovieBookmarksController < ApplicationController
   def destroy
     @bookmark = MovieBookmark.find(params[:id])
     @bookmark.destroy
-    redirect_to movie_lists_path, status: :see_other
+    redirect_to movie_list_path(@bookmark), status: :see_other
   end
 
   private

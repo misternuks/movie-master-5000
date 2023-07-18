@@ -1,8 +1,8 @@
-<div class="banner position-relative" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(http://source.unsplash.com/random/?<%= @list.name.split(' ').first %>&movie&<%= rand(100) %>);">
+<div class="banner position-relative" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(http://source.unsplash.com/random/?<%= @list.name.split(' ').first %>&<%= rand(100) %>);">
   <div class="container">
     <h1><%= @list.name %></h1>
-    <p>View your movie bookmarks below, or add a new one.</p>
-    <%= link_to "Create a new bookmark", new_movie_list_movie_bookmark_path(@list), class: "btn btn-flat" %>
+    <p><strong>Add movies to this list by creating movie bookmarks, which will contain film posters and synopses. You can also write your own comments!</strong></p>
+    <%= link_to "Create a new movie bookmark", new_movie_list_movie_bookmark_path(@list), class: "btn btn-flat" %>
     <%= link_to movie_list_path(@list),
                 class: "position-absolute bottom-0 end-0 m-2",
                 data: { turbo_method: :delete,
@@ -14,12 +14,14 @@
 <div class="container my-5">
   <% if @list.movie_bookmarks.any? %>
     <% @list.movie_bookmarks.each do |bookmark| %>
-      <div class="card-trip">
+      <div class="card-trip my-3">
         <%= image_tag("https://image.tmdb.org/t/p/w500#{bookmark.movie_movie.image_url}") %>
         <div class="card-trip-infos position-relative">
           <div>
             <h2><%= bookmark.movie_movie.title %></h2>
-            <p><%= bookmark.comment %></p>
+            <p><strong>Synopsis:</strong> <%= bookmark.movie_movie.summary %></p>
+            <hr>
+            <p><strong>Your comment:</strong> <%= bookmark.comment %></p>
           </div>
           <%= link_to movie_bookmark_path(bookmark),
                 class: "position-absolute bottom-0 end-0 m-2",

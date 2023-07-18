@@ -1,9 +1,34 @@
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(http://source.unsplash.com/random/?cinema&<%= rand(1000) %>);">
+  <div class="container">
+    <h1>Movie Master 5000</h1>
+    <p><strong>Make lists of movies that you want to watch! You can categorize the lists, write comments about the films, and more!</strong></p>
+    <%= link_to "Create a new movie list", new_movie_list_path, class: "btn btn-flat my-3" %>
+  </div>
+</div>
 <div class="container my-5 p-5 d-flex flex-column align-items-center">
-  <h1>Movie Lists</h1>
   <% @lists.each do |list| %>
-    <div class="card-category my-3 position-relative" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(http://source.unsplash.com/random/?<%= list.name.split(' ').first %>&<%= rand(100) %>)">
+    <div class="card-category my-3 position-relative" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(http://source.unsplash.com/random/?<%= list.name.split(' ').first %>&<%= rand(1000) %>)">
       <%= link_to list.name, movie_list_path(list), class: "stretched-link text-white text-decoration-none" %>
     </div>
   <% end %>
-  <%= link_to "Create a new movie list +", new_movie_list_path, class: "btn btn-flat my-3 w-100" %>
+</div>
+<hr>
+<div class="d-flex justify-content-center align-items-baseline mx-3 mb-3 flex-wrap">
+  <div>
+    <p>Created by Matthew Miner, 2023. Check me out: </p>
+  </div>
+  <div>
+    <%= link_to "https://www.matthewgedminer.com", target: '_blank', class: 'btn btn-lg' do %>
+      <i class='fa-solid fa-globe'></i>
+    <% end %>
+    <%= mail_to 'misternuks@gmail.com', '', class: 'btn btn-lg' do %>
+      <i class='fa-solid fa-envelope'></i>
+    <% end %>
+    <%= link_to 'https://github.com/misternuks/', target: '_blank', class: 'btn btn-lg' do %>
+      <i class='fa-brands fa-github'></i>
+    <% end %>
+    <%= link_to 'https://www.linkedin.com/in/matthew-ged-miner/', target: '_blank', class: 'btn btn-lg' do %>
+      <i class='fa-brands fa-linkedin'></i>
+    <% end %>
+  </div>
 </div>
